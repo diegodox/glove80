@@ -55,7 +55,7 @@
         compatible = "zmk,combos";
         combo_esc {
             timeout-ms = <50>;
-            key-positions = <71 74>; // muhenkan + henkan positions
+            key-positions = <69 74>; // muhenkan (69) + henkan (74) positions
             bindings = <&kp ESC>;
         };
     };
@@ -162,8 +162,8 @@
             &kp ESC        &jis_N1  &jis_N2     &jis_N3     &jis_N4     &jis_N5                                                                    &jis_N6    &jis_N7     &jis_N8     &jis_N9     &jis_N0     &jis_GRAVE
             &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y      &kp U       &kp I       &kp O       &kp P       &jis_US_MINUS
             &kp LCTRL      &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H      &kp J       &kp K       &kp L       &jis_COLON  &jis_QUOTE
-            &kp LSHFT      &kp Z    &kp X       &kp C       &kp V       &kp B   &jis_RBKT   &kp DEL     &kp LALT   &kp LALT  &kp BSPC  &jis_LBKT   &kp N      &kp M       &kp COMMA   &kp DOT     &kp FSLH    &jis_EQUAL
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &muhenkan_ht NUMPAD INT5 &kp SPACE &kp LGUI &kp LGUI &kp RET &henkan_ht SYMBOLS INT4  &kp UP &kp DOWN &kp RSHFT &kp PG_UP &kp PG_DN
+            &kp LSHFT      &kp Z    &kp X       &kp C       &kp V       &kp B   &jis_LBKT   &kp DEL     &kp LALT   &kp LALT  &kp BSPC  &jis_RBKT   &kp N      &kp M       &kp COMMA   &kp DOT     &kp FSLH    &jis_EQUAL
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &muhenkan_ht NUMPAD INT5 &kp SPACE &kp LGUI &kp LGUI &kp RET &henkan_ht SYMBOLS INT4  &kp UP &kp DOWN &kp BKSP &kp PG_UP &kp PG_DN
             >;
         };
 
@@ -202,6 +202,7 @@
 
         numpad_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
+            // NUMPAD layer: asdfgzxcvb = 1234567890, qwertyuiop = !@#$%^&*()
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |       |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  (   |   )   |      |
             // |       |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |      |
@@ -210,7 +211,7 @@
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
             bindings = <
             &trans   &trans      &trans      &trans      &trans                                                                                 &trans   &trans      &trans      &trans      &trans      &trans
-            &trans   &kp LS(N1)  &kp LBKT    &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                                                         &kp EQUAL &kp LS(N6) &kp LS(SQT) &kp LS(N8)  &kp LS(N9)  &trans
+            &trans   &kp EXCL    &kp LBKT    &kp HASH    &kp DLLR    &kp PRCNT                                                          &kp EQUAL &kp LS(N6) &kp LS(SQT) &kp LS(N8)  &kp LS(N9)  &trans
             &trans   &trans      &trans      &trans      &trans      &trans                                                             &trans   &trans      &trans      &trans      &trans      &trans
             &trans   &kp N1      &kp N2      &kp N3      &kp N4      &kp N5                                                             &trans   &trans      &trans      &trans      &trans      &trans
             &trans   &kp N6      &kp N7      &kp N8      &kp N9      &kp N0      &trans  &trans  &trans     &trans  &trans  &trans     &trans   &trans      &trans      &trans      &trans      &trans
@@ -220,7 +221,7 @@
 
         symbols_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
-            // Shifted symbols layer - all symbols are shifted versions
+            // SYMBOLS layer - all symbols are shifted versions (JIS keycodes)
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
             // |   ~   |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  (   |   )   |   _  |
             // |       |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   +  |
@@ -229,7 +230,7 @@
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |  {   |   }   |      |
             bindings = <
             &trans         &trans   &trans      &trans      &trans                                                                                    &trans      &trans      &trans      &trans      &trans      &trans
-            &kp LS(EQUAL)  &kp LS(N1) &kp LBKT  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                                                            &kp EQUAL   &kp LS(N6)  &kp LS(SQT) &kp LS(N8)  &kp LS(N9)  &kp LS(INT_RO)
+            &kp LS(EQUAL)  &kp EXCL &kp LBKT    &kp HASH    &kp DLLR    &kp PRCNT                                                             &kp EQUAL   &kp LS(N6)  &kp LS(SQT) &kp LS(N8)  &kp LS(N9)  &kp LS(INT_RO)
             &trans         &trans   &trans      &trans      &trans      &trans                                                                &trans      &trans      &trans      &trans      &trans      &kp LS(SEMI)
             &trans         &trans   &trans      &trans      &trans      &trans                                                                &trans      &trans      &trans      &trans      &kp SQT     &kp LS(N2)
             &trans         &trans   &trans      &trans      &trans      &trans      &kp LS(BSLH) &trans &trans  &trans &trans &kp LS(RBKT)  &trans      &trans      &kp LS(COMMA) &kp LS(DOT) &kp LS(FSLH) &trans
