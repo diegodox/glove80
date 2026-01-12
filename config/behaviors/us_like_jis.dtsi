@@ -1,27 +1,27 @@
 / {
     behaviors {
-        // [ , shift: {
+        // US [, shift: { (JIS: RBKT for "[", LS(RBKT) for "{")
         jis_LBKT: jis_LBKT {
             compatible = "zmk,behavior-mod-morph";
             label = "jis_LBKT";
             #binding-cells = <0>;
-            bindings = <&kp LBKT>, <&kp LBRC>;
+            bindings = <&kp RBKT>, <&kp LS(RBKT)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // ] , shift: }
+        // US ], shift: } (JIS: BSLH for "]", LS(BSLH) for "}")
         jis_RBKT: jis_RBKT {
             compatible = "zmk,behavior-mod-morph";
             label = "jis_RBKT";
             #binding-cells = <0>;
-            bindings = <&kp RBKT>, <&kp RBRC>;
+            bindings = <&kp BSLH>, <&kp LS(BSLH)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // ;, shift: :
+        // US ;, shift: : (JIS: SEMI for ";", SQT for ":")
         jis_COLON: jis_COLON {
             compatible = "zmk,behavior-mod-morph";
             label = "jis_COLON";
             #binding-cells = <0>;
-            bindings = <&kp SEMI>, <&kp COLON>;
+            bindings = <&kp SEMI>, <&kp SQT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
@@ -33,12 +33,12 @@
             bindings = <&kp N1>, <&kp EXCL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 2, @
+        // 2, @ (JIS: 2 for "2", LBKT for "@")
         jis_N2: jis_N2 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N2";
             #binding-cells = <0>;
-            bindings = <&kp N2>, <&kp AT>;
+            bindings = <&kp N2>, <&kp LBKT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
         // 3, #
@@ -65,44 +65,92 @@
             bindings = <&kp N5>, <&kp PRCNT>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 6, ^
+        // 6, ^ (JIS: 6 for "6", EQUAL for "^")
         jis_N6: jis_N6 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N6";
             #binding-cells = <0>;
-            bindings = <&kp N6>, <&kp CARET>;
+            bindings = <&kp N6>, <&kp EQUAL>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 7, &
+        // 7, & (JIS: 7 for "7", LS(N6) for "&")
         jis_N7: jis_N7 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N7";
             #binding-cells = <0>;
-            bindings = <&kp N7>, <&kp AMPS>;
+            bindings = <&kp N7>, <&kp LS(N6)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 8, *
+        // 8, * (JIS: 8 for "8", LS(SQT) for "*")
         jis_N8: jis_N8 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N8";
             #binding-cells = <0>;
-            bindings = <&kp N8>, <&kp STAR>;
+            bindings = <&kp N8>, <&kp LS(SQT)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 9, (
+        // 9, ( (JIS: 9 for "9", LS(N8) for "(")
         jis_N9: jis_N9 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N9";
             #binding-cells = <0>;
-            bindings = <&kp N9>, <&kp LPAR>;
+            bindings = <&kp N9>, <&kp LS(N8)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
-        // 0, )
+        // 0, ) (JIS: 0 for "0", LS(N9) for ")")
         jis_N0: jis_N0 {
             compatible = "zmk,behavior-mod-morph";
             label = "us_N0";
             #binding-cells = <0>;
-            bindings = <&kp N0>, <&kp RPAR>;
+            bindings = <&kp N0>, <&kp LS(N9)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US -, shift: = (JIS: MINUS for "-", LS(MINUS) for "=")
+        jis_MINUS: jis_MINUS {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_MINUS";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp LS(MINUS)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US ^, shift: ~ (for rightmost column after 0: EQUAL for "^", LS(EQUAL) for "~")
+        jis_CARET: jis_CARET {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_CARET";
+            #binding-cells = <0>;
+            bindings = <&kp EQUAL>, <&kp LS(EQUAL)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US ', shift: " (JIS: LS(N7) for "'", LS(N2) for '"')
+        jis_QUOTE: jis_QUOTE {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_QUOTE";
+            #binding-cells = <0>;
+            bindings = <&kp LS(N7)>, <&kp LS(N2)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US `, shift: ~ (JIS: LS(LBKT) for "`", LS(EQUAL) for "~")
+        jis_GRAVE: jis_GRAVE {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_GRAVE";
+            #binding-cells = <0>;
+            bindings = <&kp LS(LBKT)>, <&kp LS(EQUAL)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US -, shift: _ (JIS: MINUS for "-", LS(INT_RO) for "_")
+        jis_US_MINUS: jis_US_MINUS {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_US_MINUS";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp LS(INT_RO)>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // US =, shift: + (JIS: LS(MINUS) for "=", LS(SEMI) for "+")
+        jis_EQUAL: jis_EQUAL {
+            compatible = "zmk,behavior-mod-morph";
+            label = "jis_EQUAL";
+            #binding-cells = <0>;
+            bindings = <&kp LS(MINUS)>, <&kp LS(SEMI)>;
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
     };

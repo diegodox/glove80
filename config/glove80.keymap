@@ -20,27 +20,33 @@
 #define MAGIC 2
 #define FACTORY_TEST 3
 
-// JIS key definitions for US physical layout
-#define JP_DQUOTE     AT               // "
-#define JP_AMPERSAND  CARET            // &
-#define JP_QUOTE      AMPERSAND        // '
-#define JP_EQUAL      UNDER            // =
-#define JP_CARET      EQUAL            // ^
-#define JP_YEN        0x89             // ¥
-#define JP_PLUS       COLON            // +
-#define JP_TILDE      PLUS             // ~
-#define JP_PIPE       LS(0x89)         // |
-#define JP_AT         LEFT_BRACKET     // @
-#define JP_COLON      SINGLE_QUOTE     // :
-#define JP_ASTRK      DOUBLE_QUOTES    // *
-#define JP_BACKQUOTE  LEFT_BRACE       // `
-#define JP_UNDERSCORE LS(0x87)         // _
-#define JP_LBRACKET   RIGHT_BRACKET    // [
-#define JP_RBRACKET   BACKSLASH        // ]
-#define JP_LPAREN     ASTERISK         // (
-#define JP_RPAREN     LEFT_PARENTHESIS // )
-#define JP_LBRACE     RIGHT_BRACE      // {
-#define JP_RBRACE     PIPE             // }
+// JIS key definitions - maps US physical layout to JIS OS output
+// Basic symbols
+#define JIS_AT        LBKT          // @
+#define JIS_BACKQUOTE LS(LBKT)      // `
+#define JIS_CARET     EQUAL         // ^
+#define JIS_TILDE     LS(EQUAL)     // ~
+#define JIS_LBRACKET  RBKT          // [
+#define JIS_LBRACE    LS(RBKT)      // {
+#define JIS_RBRACKET  BSLH          // ]
+#define JIS_RBRACE    LS(BSLH)      // }
+#define JIS_SEMICOLON SEMI          // ;
+#define JIS_PLUS      LS(SEMI)      // +
+#define JIS_COLON     SQT           // :
+#define JIS_ASTERISK  LS(SQT)       // *
+#define JIS_MINUS     MINUS         // -
+#define JIS_EQUAL     LS(MINUS)     // =
+#define JIS_UNDERSCORE LS(INT_RO)   // _
+#define JIS_QUOTE     LS(N7)        // '
+#define JIS_DQUOTE    LS(N2)        // "
+#define JIS_AMPERSAND LS(N6)        // &
+#define JIS_LPAREN    LS(N8)        // (
+#define JIS_RPAREN    LS(N9)        // )
+// Japanese specific keys
+#define JIS_YEN       INT_RO        // ¥
+#define JIS_PIPE      LS(INT_RO)    // | (alternative: LS(YEN))
+#define JIS_HENKAN    INT4          // 変換
+#define JIS_MUHENKAN  INT5          // 無変換
 
 / {
     behaviors {
@@ -116,28 +122,28 @@
         default_layer {
             // ---------------------------------------------------------------------------------------------------------------------------------
             // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
-            // |  ^    |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   =  |  (JIS layout)
-            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   @  |
-            // |  ESC  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   :  |
-            // |   '   |  Z  |  X  |  C   |  V   |  B   | LSHFT | LCTRL | LOWER | | LGUI  | RCTRL | RSHFT |  N   |   M   |   ,   |  .   |   /   | PGUP |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | BSPC  | DEL   | LALT  | | RALT  | RET   | SPACE |      |  UP   | DOWN  |  [   |   ]   | PGDN |
+            // |  ESC  |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   `  |  (US layout, JIS keycodes)
+            // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   -  |
+            // | CTRL  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '  |
+            // | SHFT  |  Z  |  X  |  C   |  V   |  B   |  }    | DEL   | ALT   | | ALT   | BSPC  |  {    |  N   |   M   |   ,   |  .   |   /   |   =  |
+            // | MAGIC | HOME| END | LEFT | RIGHT|      | 無変換 | SPACE | GUI   | | GUI   | ENTER | 変換  |      |  UP   | DOWN  | Shift | PGUP | PGDN |
 
             bindings = <
             &kp F1         &kp F2   &kp F3      &kp F4      &kp F5                                                                                         &kp F6     &kp F7      &kp F8      &kp F9      &kp F10
-            &kp JP_CARET   &jis_N1  &jis_N2     &jis_N3     &jis_N4     &jis_N5                                                                    &jis_N6    &jis_N7     &jis_N8     &jis_N9     &jis_N0     &kp JP_EQUAL
-            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y      &kp U       &kp I       &kp O       &kp P       &kp JP_AT
-            &kp ESC        &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H      &kp J       &kp K       &kp L       &jis_COLON  &kp JP_COLON
-            &kp JP_QUOTE   &kp Z    &kp X       &kp C       &kp V       &kp B   &kp LSHFT   &kp LCTRL   &layer_td  &kp LGUI  &kp RCTRL &kp RSHFT   &kp N      &kp M       &kp COMMA   &kp DOT     &kp FSLH    &kp PG_UP
-            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp BSPC    &kp DEL     &kp LALT   &kp RALT  &kp RET   &kp SPACE              &kp UP      &kp DOWN    &jis_LBKT   &jis_RBKT   &kp PG_DN
+            &kp ESC        &jis_N1  &jis_N2     &jis_N3     &jis_N4     &jis_N5                                                                    &jis_N6    &jis_N7     &jis_N8     &jis_N9     &jis_N0     &jis_GRAVE
+            &kp TAB        &kp Q    &kp W       &kp E       &kp R       &kp T                                                                      &kp Y      &kp U       &kp I       &kp O       &kp P       &jis_US_MINUS
+            &kp LCTRL      &kp A    &kp S       &kp D       &kp F       &kp G                                                                      &kp H      &kp J       &kp K       &kp L       &jis_COLON  &jis_QUOTE
+            &kp LSHFT      &kp Z    &kp X       &kp C       &kp V       &kp B   &jis_RBKT   &kp DEL     &kp LALT   &kp LALT  &kp BSPC  &jis_LBKT   &kp N      &kp M       &kp COMMA   &kp DOT     &kp FSLH    &jis_EQUAL
+            &magic MAGIC 0 &kp HOME &kp END     &kp LEFT    &kp RIGHT           &kp INT5    &kp SPACE   &kp LGUI   &kp LGUI  &kp RET   &kp INT4               &kp UP      &kp DOWN    &kp RSHFT   &kp PG_UP   &kp PG_DN
             >;
         };
 
         lower_layer {
             bindings = <
             &kp C_BRI_DN      &kp C_BRI_UP        &kp C_PREV      &kp C_NEXT      &kp C_PP                                                                                                           &kp C_MUTE   &kp C_VOL_DN &kp C_VOL_UP  &none           &kp PAUSE_BREAK
-            &trans            &none               &none           &none           &none           &kp HOME                                                                              &kp JP_LPAREN &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
-            &trans            &none               &none           &kp UP          &none           &kp END                                                                               &kp JP_RPAREN &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp MINUS       &kp SLCK
-            &trans            &none               &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp JP_PLUS     &none
+            &trans            &none               &none           &none           &none           &kp HOME                                                                              &kp LS(N8)   &kp KP_NUM   &kp KP_EQUAL &kp KP_DIVIDE &kp KP_MULTIPLY &kp PSCRN
+            &trans            &none               &none           &kp UP          &none           &kp END                                                                               &kp LS(N9)   &kp KP_N7    &kp KP_N8    &kp KP_N9     &kp MINUS       &kp SLCK
+            &trans            &none               &kp LEFT        &kp DOWN        &kp RIGHT       &kp PG_UP                                                                             &kp PRCNT    &kp KP_N4    &kp KP_N5    &kp KP_N6     &kp LS(SEMI)    &none
             &trans            &kp K_CMENU         &none           &kp F11         &kp F12         &kp PG_DN       &trans      &trans      &to DEFAULT &trans      &trans      &trans    &kp COMMA    &kp KP_N1    &kp KP_N2    &kp KP_N3     &kp KP_ENTER    &trans
             &trans            &kp CAPS            &kp INS         &kp F11         &kp F12                         &trans      &trans      &trans      &trans      &trans      &trans                 &kp KP_N0    &kp KP_N0    &kp KP_DOT    &kp KP_ENTER    &trans
             >;
