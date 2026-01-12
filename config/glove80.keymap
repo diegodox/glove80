@@ -62,6 +62,12 @@
             key-positions = <69 74>; // muhenkan (69) + henkan (74) positions
             bindings = <&kp ESC>;
         };
+
+        combo_tab {
+            timeout-ms = <50>;
+            key-positions = <37 38>; // D (37) + F (38)
+            bindings = <&kp TAB>;
+        };
     };
 
     behaviors {
@@ -101,6 +107,16 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&kp>;
+        };
+
+        semicolon_rctrl: semicolon_rctrl {
+            compatible = "zmk,behavior-hold-tap";
+            label = "SEMICOLON_RCTRL";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
+            quick-tap-ms = <150>;
+            bindings = <&kp>, <&jis_COLON>;
         };
     };
 
@@ -149,7 +165,7 @@
             // |  F1   |  F2 |  F3 |  F4  |  F5  |                                                               |  F6   |  F7   |  F8  |   F9  |  F10 |
             // |  ESC  |  1  |  2  |  3   |  4   |  5   |                                                 |  6   |   7   |   8   |  9   |   0   |   `  |  (US layout, JIS keycodes)
             // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   -  |
-            // | CTRL  |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   ;   |   '  |
+            // | CTRL  | A/Ctrl | S/Shift | D | F | G   |                                                 |  H   |   J   |   K   | L/Shift | ;/Ctrl |   '  |  (Home row mods)
             // | SHFT  |  Z  |  X  |  C   |  V   |  B   |  }    | DEL   | ALT   | | ALT   | BSPC  |  {    |  N   |   M   |   ,   |  .   |   /   |   =  |
             // | MAGIC | HOME| END | LEFT | RIGHT|      | 無変換 | SPACE | GUI   | | GUI   | ENTER | 変換  |      |  UP   | DOWN  | Shift | PGUP | PGDN |
 
@@ -157,7 +173,7 @@
 &kp F1          &kp F2    &kp F3   &kp F4    &kp F5                                                                                                                   &kp F6   &kp F7     &kp F8         &kp F9      &kp F10
 &kp ESC         &jis_N1   &jis_N2  &jis_N3   &jis_N4    &jis_N5                                                                                              &jis_N6  &jis_N7  &jis_N8    &jis_N9        &jis_N0     &jis_GRAVE
 &kp TAB         &kp Q     &kp W    &kp E     &kp R      &kp T                                                                                                &kp Y    &kp U    &kp I      &kp O          &kp P       &jis_US_MINUS
-&kp LCTRL       &kp A     &kp S    &kp D     &kp F      &kp G                                                                                                &kp H    &kp J    &kp K      &kp L          &jis_COLON  &jis_QUOTE
+&kp LCTRL       &mt LCTRL A  &mt LSHFT S  &kp D  &kp F  &kp G                                                                                           &kp H    &kp J    &kp K      &mt RSHFT L    &semicolon_rctrl RCTRL 0  &jis_QUOTE
 &kp LSHFT       &kp Z     &kp X    &kp C     &kp V      &kp B    &jis_LBKT                 &kp DEL    &kp LALT  &kp LALT  &kp BSPC  &jis_RBKT                &kp N    &kp M    &kp COMMA  &kp DOT        &kp FSLH    &jis_EQUAL
 &magic MAGIC 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT           &muhenkan_ht NUMPAD INT5  &kp SPACE  &kp LGUI  &kp LGUI  &kp RET   &henkan_ht SYMBOLS INT4           &kp UP   &kp DOWN   &kp BACKSPACE  &kp PG_UP   &kp PG_DN
             >;
