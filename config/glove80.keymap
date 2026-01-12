@@ -227,12 +227,12 @@
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |  {   |   }   |      |
 
             bindings = <
-&trans          &trans         &trans    &trans    &trans                                                                                  &trans     &trans      &trans         &trans        &trans
-&trans          &kp LS(EQUAL)  &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR                                                        &kp PRCNT     &kp EQUAL  &kp LS(N6)  &kp LS(SQT)    &kp LS(N8)    &kp LS(N9)
-&kp LS(INT_RO)  &trans         &trans    &trans    &trans    &trans                                                          &trans        &trans     &trans      &trans         &trans        &trans
-&kp LS(SEMI)    &trans         &trans    &trans    &trans    &trans                                                          &trans        &trans     &trans      &trans         &trans        &kp SQT
-&kp LS(N2)      &trans         &trans    &trans    &trans    &trans    &trans  &kp LS(BSLH)  &trans  &trans  &trans  &trans  &kp LS(RBKT)  &trans     &trans      &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)
-&trans          &trans         &trans    &trans    &trans              &trans  &trans        &trans  &trans  &trans  &trans                &trans     &trans      &trans         &kp LS(RBKT)  &kp LS(BSLH)
+&trans          &trans         &trans    &trans    &trans                                                                                    &trans     &trans      &trans         &trans        &trans
+&trans          &kp LS(EQUAL)  &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR                                                        &kp PRCNT       &kp EQUAL  &kp LS(N6)  &kp LS(SQT)    &kp LS(N8)    &kp LS(N9)
+&kp LS(INT_RO)  &trans         &trans    &trans    &trans    &trans                                                          &trans          &trans     &trans      &trans         &trans        &trans
+&kp LS(SEMI)    &trans         &trans    &trans    &trans    &trans                                                          &kp LEFT_ARROW  &kp DOWN   &kp UP      &kp RIGHT      &trans        &kp SQT
+&kp LS(N2)      &trans         &trans    &trans    &trans    &trans    &trans  &kp LS(BSLH)  &trans  &trans  &trans  &trans  &kp LS(RBKT)    &trans     &trans      &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)
+&trans          &trans         &trans    &trans    &trans              &trans  &trans        &trans  &trans  &trans  &trans                  &trans     &trans      &trans         &kp LS(RBKT)  &kp LS(BSLH)
             >;
         };
     };
