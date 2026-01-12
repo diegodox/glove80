@@ -57,12 +57,6 @@
     combos {
         compatible = "zmk,combos";
 
-        combo_esc {
-            timeout-ms = <50>;
-            key-positions = <69 74>; // muhenkan (69) + henkan (74) positions
-            bindings = <&kp ESC>;
-        };
-
         combo_tab {
             timeout-ms = <50>;
             key-positions = <37 38>; // D (37) + F (38)
@@ -109,14 +103,41 @@
             bindings = <&mo>, <&kp>;
         };
 
+        // Home row mods - optimized for typing
+        hm_l: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_LEFT";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <6 7 8 9 10 11 18 19 20 21 22 23 30 31 32 33 34 35 42 43 44 45 46 47 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79>;  // right hand + thumbs
+            hold-trigger-on-release;  // Activate hold immediately when pressing cross-hand key
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS_RIGHT";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79>;  // left hand + thumbs
+            hold-trigger-on-release;  // Activate hold immediately when pressing cross-hand key
+        };
+
         semicolon_rctrl: semicolon_rctrl {
             compatible = "zmk,behavior-hold-tap";
             label = "SEMICOLON_RCTRL";
             #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <250>;
-            quick-tap-ms = <150>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
             bindings = <&kp>, <&jis_COLON>;
+            hold-trigger-key-positions = <0 1 2 3 4 5 12 13 14 15 16 17 24 25 26 27 28 29 36 37 38 39 40 41 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79>;  // left hand + thumbs
+            hold-trigger-on-release;  // Activate hold immediately when pressing cross-hand key
         };
     };
 
@@ -167,15 +188,15 @@
             // |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   -  |
             // | CTRL  | A/Ctrl | S/Shift | D | F | G   |                                                 |  H   |   J   |   K   | L/Shift | ;/Ctrl |   '  |  (Home row mods)
             // | SHFT  |  Z  |  X  |  C   |  V   |  B   |  }    | DEL   | ALT   | | ALT   | BSPC  |  {    |  N   |   M   |   ,   |  .   |   /   |   =  |
-            // | MAGIC | HOME| END | LEFT | RIGHT|      | 無変換 | SPACE | GUI   | | GUI   | ENTER | 変換  |      |  UP   | DOWN  | Shift | PGUP | PGDN |
+            // | MAGIC | HOME| END | LEFT | RIGHT|      | 無変換 | SPACE | GUI   | | BKSP | ENTER | 変換  |      |  UP   | DOWN  | Shift | PGUP | PGDN |
 
             bindings = <
 &kp F1          &kp F2    &kp F3   &kp F4    &kp F5                                                                                                                   &kp F6   &kp F7     &kp F8         &kp F9      &kp F10
 &kp ESC         &jis_N1   &jis_N2  &jis_N3   &jis_N4    &jis_N5                                                                                              &jis_N6  &jis_N7  &jis_N8    &jis_N9        &jis_N0     &jis_GRAVE
 &kp TAB         &kp Q     &kp W    &kp E     &kp R      &kp T                                                                                                &kp Y    &kp U    &kp I      &kp O          &kp P       &jis_US_MINUS
-&kp LCTRL       &mt LCTRL A  &mt LSHFT S  &kp D  &kp F  &kp G                                                                                           &kp H    &kp J    &kp K      &mt RSHFT L    &semicolon_rctrl RCTRL 0  &jis_QUOTE
-&kp LSHFT       &kp Z     &kp X    &kp C     &kp V      &kp B    &jis_LBKT                 &kp DEL    &kp LALT  &kp LALT  &kp BSPC  &jis_RBKT                &kp N    &kp M    &kp COMMA  &kp DOT        &kp FSLH    &jis_EQUAL
-&magic MAGIC 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT           &muhenkan_ht NUMPAD INT5  &kp SPACE  &kp LGUI  &kp LGUI  &kp RET   &henkan_ht SYMBOLS INT4           &kp UP   &kp DOWN   &kp BACKSPACE  &kp PG_UP   &kp PG_DN
+&kp LCTRL       &hm_l LCTRL A  &hm_l LSHFT S  &kp D  &kp F  &kp G                                                                                           &kp H    &kp J    &kp K      &hm_r RSHFT L    &semicolon_rctrl RCTRL 0  &jis_QUOTE
+&kp LSHFT       &kp Z     &kp X    &kp C     &kp V      &kp B    &jis_LBKT                 &kp DEL    &kp LALT  &kp LALT        &kp BSPC  &jis_RBKT                &kp N    &kp M    &kp COMMA  &kp DOT        &kp FSLH    &jis_EQUAL
+&magic MAGIC 0  &kp HOME  &kp END  &kp LEFT  &kp RIGHT           &muhenkan_ht NUMPAD INT5  &kp SPACE  &kp LGUI  &kp BACKSPACE   &kp RET   &henkan_ht SYMBOLS INT4           &kp UP   &kp DOWN   &kp RCTRL  &kp PG_UP   &kp PG_DN
             >;
         };
 
@@ -216,19 +237,19 @@
             // ---------------------------------------------------------------------------------------------------------------------------------
             // NUMPAD layer: asdfgzxcvb = 1234567890, qwertyuiop = !@#$%^&*()
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
+            // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
             // |       |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  (   |   )   |      |
-            // |       |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |      |
             // |       |  1  |  2  |  3   |  4   |  5   |                                                 |  H   |   J   |   K   |  L   |   ;   |      |
             // |       |  6  |  7  |  8   |  9   |  0   |       |       |       | |       |       |       |  N   |   M   |   ,   |  .   |   /   |      |
             // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
 
             bindings = <
-&trans  &trans  &trans    &trans    &trans                                                                         &trans     &trans      &trans       &trans      &trans
-&trans  &trans  &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR                                                  &kp PRCNT  &kp EQUAL  &kp LS(N6)  &kp LS(SQT)  &kp LS(N8)  &kp LS(N9)
-&trans  &trans  &trans    &trans    &trans    &trans                                                    &trans     &trans     &trans      &trans       &trans      &trans
-&trans  &trans  &kp N1    &kp N2    &kp N3    &kp N4                                                    &kp N5     &trans     &trans      &trans       &trans      &trans
-&trans  &trans  &kp N6    &kp N7    &kp N8    &kp N9    &kp N0  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans      &trans       &trans      &trans
-&trans  &trans  &trans    &trans    &trans              &trans  &trans  &trans  &trans  &trans  &trans             &trans     &trans      &trans       &trans      &trans
+&trans  &trans    &trans    &trans    &trans                                                                       &trans     &trans      &trans       &trans      &trans
+&trans  &trans    &trans    &trans    &trans    &trans                                                  &trans     &trans     &trans      &trans       &trans      &trans
+&trans  &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                                               &kp EQUAL  &kp LS(N6) &kp LS(SQT) &kp LS(N8)   &kp LS(N9)  &trans
+&trans  &kp N1    &kp N2    &kp N3    &kp N4    &kp N5                                                  &trans     &trans     &trans      &trans       &trans      &trans
+&trans  &kp N6    &kp N7    &kp N8    &kp N9    &kp N0  &trans  &trans  &trans  &trans  &trans  &trans  &trans     &trans     &trans      &trans       &trans      &trans
+&trans  &trans    &trans    &trans    &trans            &trans  &trans  &trans  &trans  &trans  &kp ESC             &trans     &trans      &trans       &trans      &trans
             >;
         };
 
@@ -236,19 +257,19 @@
             // ---------------------------------------------------------------------------------------------------------------------------------
             // SYMBOLS layer - all symbols are shifted versions (JIS keycodes)
             // |       |     |     |      |      |                                                               |       |       |      |       |      |
-            // |   ~   |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  (   |   )   |   _  |
-            // |       |  Q  |  W  |  E   |  R   |  T   |                                                 |  Y   |   U   |   I   |  O   |   P   |   +  |
+            // |       |     |     |      |      |      |                                                 |      |       |       |      |       |      |
+            // |       |  !  |  @  |  #   |  $   |  %   |                                                 |  ^   |   &   |   *   |  (   |   )   |   `  |
             // |       |  A  |  S  |  D   |  F   |  G   |                                                 |  H   |   J   |   K   |  L   |   :   |   "  |
-            // |       |  Z  |  X  |  C   |  V   |  B   |   }   |       |       | |       |       |   {   |  N   |   M   |   <   |  >   |   ?   |      |
-            // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |  {   |   }   |      |
+            // |       |  Z  |  X  |  C   |  V   |  B   |       |       |       | |       |       |       |  N   |   M   |   <   |  >   |   ?   |      |
+            // |       |     |     |      |      |      |       |       |       | |       |       |       |      |       |       |      |       |      |
 
             bindings = <
 &trans          &trans         &trans    &trans    &trans                                                                                    &trans     &trans      &trans         &trans        &trans
-&trans          &kp LS(EQUAL)  &kp EXCL  &kp LBKT  &kp HASH  &kp DLLR                                                        &kp PRCNT       &kp EQUAL  &kp LS(N6)  &kp LS(SQT)    &kp LS(N8)    &kp LS(N9)
-&kp LS(INT_RO)  &trans         &trans    &trans    &trans    &trans                                                          &trans          &trans     &trans      &trans         &trans        &trans
-&kp LS(SEMI)    &trans         &trans    &trans    &trans    &trans                                                          &kp LEFT_ARROW  &kp DOWN   &kp UP      &kp RIGHT      &trans        &kp SQT
-&kp LS(N2)      &trans         &trans    &trans    &trans    &trans    &trans  &kp LS(BSLH)  &trans  &trans  &trans  &trans  &kp LS(RBKT)    &trans     &trans      &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)
-&trans          &trans         &trans    &trans    &trans              &trans  &trans        &trans  &trans  &trans  &trans                  &trans     &trans      &trans         &kp LS(RBKT)  &kp LS(BSLH)
+&trans          &trans         &trans    &trans    &trans    &trans                                                          &trans          &trans     &trans      &trans         &trans        &trans
+&trans          &kp EXCL       &kp LBKT  &kp HASH  &kp DLLR  &kp PRCNT                                                       &kp EQUAL       &kp LS(N6) &kp LS(SQT) &kp LS(N8)     &kp LS(N9)    &trans
+&trans          &trans         &trans    &trans    &trans    &trans                                                          &kp LEFT_ARROW  &kp DOWN   &kp UP      &kp RIGHT      &trans        &kp SQT
+&trans          &trans         &trans    &trans    &trans    &trans    &trans  &trans  &trans     &trans  &trans  &trans  &trans          &trans     &trans      &kp LS(COMMA)  &kp LS(DOT)   &kp LS(FSLH)
+&trans          &trans         &trans    &trans    &trans              &kp ESC  &trans  &trans     &trans  &trans  &trans                  &trans     &trans      &trans         &trans        &trans
             >;
         };
     };
